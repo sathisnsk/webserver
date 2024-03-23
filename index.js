@@ -7,6 +7,7 @@ const httpServer = http.createServer(function(req, res)
 {
 
 res.setHeader('Content-Type', 'text/html');
+res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:5500')
 fs.readFile('./index.html','utf-8', (err,data) => {
     res.write(data);
 })
