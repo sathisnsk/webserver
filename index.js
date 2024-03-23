@@ -1,19 +1,25 @@
 const http = require('http');
-const port = 3000;
+const fs = require('fs');
+const PORT = 3000;
+//const {Server} = require('socket.io');
 
-const server = http.createServer(function(req, res)
+const httpServer = http.createServer(function(req, res)
 {
 
+res.setHeader('Content-Type', 'text/html');
+fs.readFile('/index.html', (err,data) => {
+    res.write(data);
+})
 
-res.write("Hello");
+//res.write("Hello");
 
 res.end();
 
 });
 
-server.listen(port, (error) => {
+httpServer.listen(PORT, (error) => {
     if (!error) {
-        console.log(`listening on port ${port}`);
+        console.log(`listening on port ${PORT}`);
     } else {
         console.log();
     }
