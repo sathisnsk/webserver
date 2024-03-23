@@ -7,7 +7,7 @@ const httpServer = http.createServer(function(req, res)
 {
 
 res.setHeader('Content-Type', 'text/html');
-fs.readFile('/index.html', (err,data) => {
+fs.readFile('./index.html','utf-8', (err,data) => {
     res.write(data);
 })
 
