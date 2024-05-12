@@ -1,7 +1,8 @@
 const http = require('http');
 const fs = require('fs');
 const PORT = 3000;
-//const {Server} = require('socket.io');
+const {Server} = require('socket.io');
+
 
 const httpServer = http.createServer(function(req, res)
 {
@@ -34,6 +35,14 @@ res.write(JSON.stringify(testJson)); */
 //res.write('<h1>server Response</h1>');
 });
 
+const io = new Server(httpServer);
+
+io.on('connection', (socket) => {
+    console.log('a user connected');
+});
+
+
+
 httpServer.listen(PORT, (error) => {
     if (!error) {
         console.log(`listening on port ${PORT}`);
@@ -42,3 +51,19 @@ httpServer.listen(PORT, (error) => {
     }
 
 });
+
+/* const sio = require("socket.io")(httpServer, {
+    handlePreflightRequest: (req, res) => {
+        const headers = {
+            "Access-Control-Allow-Headers": "Content-Type, Authorization",
+            "Access-Control-Allow-Origin": '*', //req.headers.origin, //or the specific origin you want to give access to,
+            "Access-Control-Allow-Credentials": true
+        };
+        res.writeHead(200, headers);
+        res.end();
+    }
+});
+
+sio.on("connection", () => {
+    console.log("Connected!");
+}); */
